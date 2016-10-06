@@ -18,7 +18,7 @@ export interface AtomicElement {
     boilingPoint: number;
     density: number;
     groupBlock: string;
-    yearDiscovered: string;
+    yearDiscovered: number | string;
 }
 export interface ElementIndexer {
     [index: string]: AtomicElement;
