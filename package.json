@@ -1,11 +1,16 @@
 {
   "name": "periodic-table",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "periodic elements data",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "mocha",
-    "build": "csvtojson data.csv > data.json"
+    "clean": "rimraf lib",
+    "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
+    "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "watch": "npm run build -- --watch",
+    "watch:test": "npm run test -- --watch",
+    "csvtojson": "csvtojson data.csv > data.json"
   },
   "repository": {
     "type": "git",
@@ -24,7 +29,22 @@
   },
   "homepage": "https://github.com/andrejewski/periodic-table",
   "devDependencies": {
+    "@types/chai": "3.4.30",
+    "@types/mocha": "2.2.29",
+    "@types/node": "6.0.31",
+    "chai": "^3.5.0",
     "csvtojson": "^0.3.19",
-    "mocha": "^2.2.1"
-  }
+    "mocha": "^3.0.1",
+    "rimraf": "^2.5.4",
+    "ts-node": "^1.2.2",
+    "tslint": "3.15.1",
+    "typescript": "2.0.3"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "typings": "lib/index.d.ts"
 }

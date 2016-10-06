@@ -9,6 +9,8 @@ npm install periodic-table
 
 ## Usage
 
+### JavaScript
+
 ```js
 var pt = require('periodic-table');
 
@@ -24,13 +26,39 @@ var he = pt.symbols.He;
 // single elements by atomic number
 var he = pt.numbers[2];
 
-var util = require('periodic-table/util');
+var util = require('periodic-table/lib/util');
 
 // atomic mass of molecule
 // atomicMass("[Element][Number] [Element][Number] ...")
 // parenthesis around elements not supported..yet
 var waterMass = util.atomicMass("H2 O");
 var organicMass = util.atomicMass("C12 H22 O11");
+```
+
+### TypeScript
+
+```ts
+import * as pt from "periodic-table";
+
+// entire dataset
+let allElements = pt.all();
+
+// single elements by name
+let he = pt.elements['Helium'];
+
+// single elements by symbol
+let he = pt.symbols['He'];
+
+// single elements by atomic number
+let he = pt.numbers[2];
+
+import * as util from 'periodic-table/src/util';
+
+// atomic mass of molecule
+// atomicMass("[Element][Number] [Element][Number] ...")
+// parenthesis around elements not supported..yet
+let waterMass = util.atomicMass("H2 O");
+let organicMass = util.atomicMass("C12 H22 O11");
 ```
 
 ## Sample data
@@ -59,13 +87,31 @@ var organicMass = util.atomicMass("C12 H22 O11");
 }
 ```
 
-
 ## Contributing
 
 Is any table information wrong? Does some field need to be added or better formatted? Is there a more reliable source of information to work with? Open an issue or be even cooler and open a pull-request.
 
+### Building
+
+To build a new version of the package files, just run the build command:
+
 ```bash
-# running tests
+npm run build
+```
+
+This will generate a new set of files in the `./lib` directory, transpiled from the files in `./src`.
+
+If any update happens to the csv file, you can regenerate the json file by running:
+
+```bash
+npm run csvtojson
+```
+
+### Testing
+
+To run the tests, simply use:
+
+```bash
 npm run test
 ```
 
